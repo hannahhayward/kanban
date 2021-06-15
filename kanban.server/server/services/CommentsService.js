@@ -17,8 +17,7 @@ class CommentsService {
 
   async createComment(commentData) {
     const comment = await dbContext.Comment.create(commentData)
-    await comment.populate('creator', 'name picture').execPopulate()
-    return comment
+    return await comment.populate('creator', 'name picture').execPopulate()
   }
 
   async editComment(id, commentData) {
