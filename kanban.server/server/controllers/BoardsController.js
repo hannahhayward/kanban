@@ -33,6 +33,7 @@ export class BoardsController extends BaseController {
 
   async createBoard(req, res, next) {
     try {
+      req.body.creatorId = req.userInfo.id
       const board = await boardsService.createBoard(req.body)
       return res.send(board)
     } catch (error) {
