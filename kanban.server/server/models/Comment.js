@@ -11,3 +11,9 @@ export const CommentSchema = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
+CommentSchema.virtual('creator', {
+  localField: 'creatorId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})

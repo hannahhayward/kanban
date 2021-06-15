@@ -11,3 +11,9 @@ export const ListSchema = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
+ListSchema.virtual('creator', {
+  localField: 'creatorId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
