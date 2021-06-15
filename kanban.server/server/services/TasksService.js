@@ -10,6 +10,11 @@ class TasksService {
     return task
   }
 
+  async getAllTasks() {
+    const tasks = await dbContext.Task.find().populate('creator', 'name picture')
+    return tasks
+  }
+
   async createTask(taskData) {
     const task = await dbContext.Task.create(taskData)
     await task.populate('creator', 'name picture').execPopulate()

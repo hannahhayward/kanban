@@ -10,6 +10,11 @@ class CommentsService {
     return comment
   }
 
+  async getAllComments() {
+    const comments = await dbContext.Comment.find().populate('creator', 'name picture')
+    return comments
+  }
+
   async createComment(commentData) {
     const comment = await dbContext.Comment.create(commentData)
     await comment.populate('creator', 'name picture').execPopulate()
