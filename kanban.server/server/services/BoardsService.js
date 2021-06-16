@@ -2,8 +2,8 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class BoardsService {
-  async getAllByCreatorId(id) {
-    const board = await dbContext.Board.findById(id)
+  async getAllByCreatorId(userId) {
+    const board = await dbContext.Board.findById({ creatorId: userId })
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }
@@ -16,21 +16,21 @@ class BoardsService {
     return board
   }
 
-  async getAllBoards() {
-    const boards = await dbContext.Board.find().populate('creator', 'name picture')
+  async getAllBoards(userId) {
+    const boards = await dbContext.Board.find({ creatorId: userId }).populate('creator', 'name picture')
     return (boards)
   }
 
-  async editBoard(id, boardData) {
-    const board = await dbContext.Board.findByIdAndUpdate(id, boardData, { new: true, runValidators: true })
+  async editBoard(userId, boardData) {
+    const board = await dbContext.Board.findByIdAndUpdate({ creatorId: userId }, boardData, { new: true, runValidators: true })
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }
     return board
   }
 
-  async deleteBoard(id) {
-    const board = await dbContext.Board.findByIdAndDelete(id)
+  async deleteBoard(userId) {
+    const board = await dbContext.Board.findByIdAndDelete({ creatorId: userId })
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }

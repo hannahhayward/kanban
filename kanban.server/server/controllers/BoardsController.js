@@ -16,15 +16,16 @@ export class BoardsController extends BaseController {
 
   async getAllBoards(req, res, next) {
     try {
-      const boards = await boardsService.getAllBoards()
+      const boards = await boardsService.getAllBoards(req.userInfo.id)
       return res.send(boards)
     } catch (error) {
+      next(error)
     }
   }
 
   async getAllByCreatorId(req, res, next) {
     try {
-      const board = await boardsService.getAllByCreatorId(req.params.id)
+      const board = await boardsService.getAllByCreatorId(req.userInfo.id)
       return res.send(board)
     } catch (error) {
       next(error)
@@ -43,7 +44,7 @@ export class BoardsController extends BaseController {
 
   async editBoard(req, res, next) {
     try {
-      const board = await boardsService.editBoard(req.params.id, req.body)
+      const board = await boardsService.editBoard(req.userInfo.id, req.body)
       return res.send(board)
     } catch (error) {
       next(error)
@@ -52,7 +53,7 @@ export class BoardsController extends BaseController {
 
   async deleteBoard(req, res, next) {
     try {
-      const board = await boardsService.deleteBoard(req.params.id)
+      const board = await boardsService.deleteBoard(req.userInfo.id)
       return res.send(board)
     } catch (error) {
       next(error)

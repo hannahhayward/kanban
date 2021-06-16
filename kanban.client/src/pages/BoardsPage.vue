@@ -22,7 +22,7 @@
           </form>
         </div>
         <div class="board-list row border border-primary m-3" style="height: 70vh">
-          <Board />
+          <Board v-for="board in boards" :key="board.id" :board="board" />
         </div>
       </div>
       <div class="accountDetail col-3 border border-dark m-3" style="height: 100vh">
