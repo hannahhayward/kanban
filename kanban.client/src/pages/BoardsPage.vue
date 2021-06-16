@@ -21,13 +21,8 @@
             </div>
           </form>
         </div>
-<<<<<<< HEAD
         <div class="board-list row border border-primary m-3" style="height: 70vh">
           <Board v-for="board in boards" :key="board.id" :board="board" />
-=======
-        <div class="board-list border border-primary m-3" style="height: 70vh">
-          <Board />
->>>>>>> f4a7fffabdec11d61ff9d2c6dfbe635c1f55ffc3
         </div>
       </div>
       <div class="accountDetail col-3 border border-dark m-3" style="height: 100vh">
