@@ -5,7 +5,7 @@ import { api } from './AxiosService'
 class BoardsService {
   async getBoards() {
     const res = await api.get('/api/boards')
-    AppState.boards = res.data.boards
+    AppState.boards = res.data
     logger.log(res)
   }
 }

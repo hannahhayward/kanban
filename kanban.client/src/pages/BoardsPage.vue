@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="board-section col-7 border border-dark m-3" style="height: 100vh">
-        <div class="create-board-form border border-success m-3" style="height: 20vh">
+      <div class="board-section col-7 border border-dark " style="height: 100vh">
+        <div class="create-board-form border border-success " style="height: 20vh">
           <form class="create-list">
             <div class="form-group" @submit.prevent="createBoard">
               <label class="sr-only">Name </label>
@@ -21,11 +21,11 @@
             </div>
           </form>
         </div>
-        <div class="board-list row border border-primary m-3" style="height: 70vh">
+        <div class="board-list row border border-primary " style="height: 70vh">
           <Board v-for="board in boards" :key="board.id" :board="board" />
         </div>
       </div>
-      <div class="accountDetail col-3 border border-dark m-3" style="height: 100vh">
+      <div class="accountDetail col-3 border border-dark " style="height: 100vh">
         <Account />
       </div>
     </div>

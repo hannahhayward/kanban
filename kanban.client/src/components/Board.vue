@@ -1,14 +1,17 @@
 <template>
-  <div class="d-flex">
-    <div class="card w-100">
-      <div class="card-header">
-        <i class="fas fa-times fa-lg text-right text-danger" @click="deleteBoard(board.id)"></i>
-      </div>
-      <div class="card-body">
-        <h1 class="text-center">
-          Board Title
-        </h1>
-      </div>
+  <div class="card h-25 col-12"
+       :style="{
+         backgroundColor: board.color,
+         '-webkit-filter': true
+       }"
+  >
+    <div class="card-header">
+      <i class="fas fa-times fa-lg text-right text-danger" @click="deleteBoard(board.id)"></i>
+    </div>
+    <div class="card-body">
+      <h1 class="text-center">
+        {{ board.name }}
+      </h1>
     </div>
   </div>
 </template>
@@ -34,5 +37,8 @@ export default {
 </script>
 
 <style>
+bg{
+  background-image: url();
+}
 
 </style>
