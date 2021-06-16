@@ -1,13 +1,13 @@
 <template>
-  <div class="col-5">
+  <div class="d-flex">
     <div class="card w-100">
       <div class="card-header">
-        <button class="btn btn-danger">
-          X
-        </button>
+        <i class="fas fa-times fa-lg text-right text-danger" @click="deleteBoard(board.id)"></i>
       </div>
       <div class="card-body">
-        <h1>Board Title</h1>
+        <h1 class="text-center">
+          Board Title
+        </h1>
       </div>
     </div>
   </div>
