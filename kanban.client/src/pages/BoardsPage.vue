@@ -35,16 +35,17 @@
 <script>
 import { reactive } from '@vue/reactivity'
 import { boardsService } from '../services/BoardsService'
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
   name: 'BoardsPage',
   setup() {
-    const state = reactive({
-      newBoard: {}
-    })
+    const state = reactive({ newBoard: {} })
     return {
+      boards: computed(() => AppState.boards),
       state,
-      createBoard() {
-        boardsService.createBoard()
+      createBoard(newBoard) {
+        boardsService.createBoard(newBoard)
       }
     }
   }

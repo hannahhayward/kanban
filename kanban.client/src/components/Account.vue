@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-dark text-light d-flex h-100">
+  <div class="card bg-dark text-light d-flex h-75">
     <div class="card-header">
       <h1>
         USERNAME
