@@ -1,5 +1,5 @@
 <template>
-  <div class="card h-25 col-12"
+  <div class="card w-100 my-3 text-light"
        :style="{
          backgroundColor: board.color,
          '-webkit-filter': true
@@ -9,7 +9,7 @@
       <i class="fas fa-times fa-lg text-right text-danger" @click="deleteBoard(board.id)"></i>
     </div>
     <div class="card-body">
-      <h1 class="text-center">
+      <h1 class="text-center text">
         {{ board.name }}
       </h1>
     </div>
@@ -37,8 +37,8 @@ export default {
 </script>
 
 <style>
-bg{
-  background-image: url();
+.text{
+ text-shadow: 1px 1px #81817d ;
 }
 
 </style>

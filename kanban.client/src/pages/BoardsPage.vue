@@ -1,31 +1,33 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="board-section col-7 border border-dark " style="height: 100vh">
-        <div class="create-board-form border border-success " style="height: 20vh">
+      <div class="board-section col-7 m-3" style="height: 100vh">
+        <div class="create-board-form m-3 bg shadow px-2 pt-2" style="height: 20vh">
           <form class="create-list">
-            <div class="form-group" @submit.prevent="createBoard">
+            <div class="form-group my-1" @submit.prevent="createBoard">
               <label class="sr-only">Name </label>
-              <input type="text" class="form-control" v-model="state.newBoard.name" placeholder="Name" required>
-              <div class="form-group">
+              <input type="text" class="form-control outline" v-model="state.newBoard.name" placeholder="Name" required>
+              <div class="form-group my-1">
                 <label class="sr-only">Color </label>
-                <input type="color" class="form-control" v-model="state.newBoard.color" placeholder="Color">
-                <div class="form-group">
+                <input type="color" class="form-control outline" v-model="state.newBoard.color" placeholder="Color">
+                <div class="form-group my-1">
                   <label class="sr-only">Background image </label>
-                  <input type="text" class="form-control" v-model="state.newBoard.bgImg" placeholder="Background image">
+                  <input type="text" class="form-control outline" v-model="state.newBoard.bgImg" placeholder="Background image">
                 </div>
-                <button class=" btn btn-primary btn-block" type="submit">
+                <button class=" btn btn-success btn-block" type="submit">
                   <i class="far fa-calendar-plus fa-lg"></i>
                 </button>
               </div>
             </div>
           </form>
         </div>
-        <div class="board-list row border border-primary " style="height: 70vh">
-          <Board v-for="board in boards" :key="board.id" :board="board" />
+        <div class="board-list row m-3" style="height: 70vh">
+          <div class="col-12 bg shadow">
+            <Board v-for="board in boards" :key="board.id" :board="board" />
+          </div>
         </div>
       </div>
-      <div class="accountDetail col-3 border border-dark " style="height: 100vh">
+      <div class="accountDetail col-3 border border-dark m-3" style="height: 100vh">
         <Account />
       </div>
     </div>
@@ -53,5 +55,12 @@ export default {
 </script>
 
 <style scoped>
+.bg{
+  background-color: #e2e2df;
+  outline: solid .5px; color: #dfdfd5;
+}
+.outline{
+  border: dashed green 1.85px;
 
+}
 </style>
