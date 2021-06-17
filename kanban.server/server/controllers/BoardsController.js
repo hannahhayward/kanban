@@ -25,7 +25,7 @@ export class BoardsController extends BaseController {
 
   async getAllByCreatorId(req, res, next) {
     try {
-      const board = await boardsService.getAllByCreatorId(req.userInfo.id)
+      const board = await boardsService.getAllByCreatorId(req.params.id)
       return res.send(board)
     } catch (error) {
       next(error)
