@@ -16,9 +16,10 @@ export class CommentsController extends BaseController {
 
   async getAllComments(req, res, next) {
     try {
-      const comments = await commentsService.getAllComments()
+      const comments = await commentsService.getAllComments(req.userInfo.id)
       return res.send(comments)
     } catch (error) {
+      next(error)
     }
   }
 
@@ -42,7 +43,7 @@ export class CommentsController extends BaseController {
 
   async editComment(req, res, next) {
     try {
-      const comment = await commentsService.editComment(req.params.id, req.body)
+      const comment = await commentsService.editComment(req.userInfo.id, req.body)
       return res.send(comment)
     } catch (error) {
       next(error)

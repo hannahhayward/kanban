@@ -16,7 +16,7 @@ export class ListsController extends BaseController {
 
   async getAllLists(req, res, next) {
     try {
-      const lists = await listsService.getAllLists()
+      const lists = await listsService.getAllLists(req.userInfo.id)
       return res.send(lists)
     } catch (error) {
     }
@@ -43,7 +43,7 @@ export class ListsController extends BaseController {
 
   async editList(req, res, next) {
     try {
-      const list = await listsService.editList(req.params.id, req.body)
+      const list = await listsService.editList(req.userInfo.id, req.body)
       return res.send(list)
     } catch (error) {
       next(error)
@@ -52,7 +52,7 @@ export class ListsController extends BaseController {
 
   async deleteList(req, res, next) {
     try {
-      const list = await listsService.deleteList(req.params.id)
+      const list = await listsService.deleteList(req.userInfo.id)
       return res.send(list)
     } catch (error) {
       next(error)
