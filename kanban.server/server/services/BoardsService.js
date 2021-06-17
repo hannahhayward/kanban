@@ -21,16 +21,16 @@ class BoardsService {
     return board
   }
 
-  async editBoard(userId, boardData) {
-    const board = await dbContext.Board.findByIdAndUpdate(userId, boardData, { new: true, runValidators: true })
+  async editBoard(Id, boardData) {
+    const board = await dbContext.Board.findByIdAndUpdate(Id, boardData, { new: true, runValidators: true })
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }
     return board
   }
 
-  async deleteBoard(userId) {
-    const board = await dbContext.Board.findByIdAndDelete(userId)
+  async deleteBoard(Id) {
+    const board = await dbContext.Board.findByIdAndDelete(Id)
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }

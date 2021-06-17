@@ -3,7 +3,7 @@ import { BadRequest } from '../utils/Errors'
 
 class ListsService {
   async getAllListsByBoardId(Id) {
-    const list = await dbContext.Board.find(d => d === Id)
+    const list = await dbContext.List.find({ boardId: Id })
     if (!list) {
       throw new BadRequest('Invalid List Id')
     }

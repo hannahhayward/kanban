@@ -2,10 +2,10 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class TasksService {
-  async getAllByCreatorId(userId) {
-    const task = await dbContext.Task.findById(userId)
+  async getAllTasksByBoardId(Id) {
+    const task = await dbContext.Task.find({ BoardId: Id })
     if (!task) {
-      throw new BadRequest('Invalid task Id')
+      throw new BadRequest('Invalid List Id')
     }
     return task
   }

@@ -44,7 +44,7 @@ export class BoardsController extends BaseController {
 
   async editBoard(req, res, next) {
     try {
-      const board = await boardsService.editBoard(req.userInfo.id, req.body)
+      const board = await boardsService.editBoard(req.params.id, req.body)
       return res.send(board)
     } catch (error) {
       next(error)

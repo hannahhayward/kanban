@@ -79,7 +79,7 @@ export default {
     return {
       state,
       lists: computed(() => AppState.lists),
-      tasks: computed(() => AppState.tasks.filter(t => props.listProp.id === t.listId)),
+      tasks: computed(() => AppState.tasks),
 
       async deleteTask(id) {
         if (confirm('Do you really want to delete this task ??')) {

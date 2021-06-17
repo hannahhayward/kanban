@@ -21,6 +21,7 @@ import { useRoute } from 'vue-router'
 import { boardsService } from '../services/BoardsService'
 import { AppState } from '../AppState'
 import { listsService } from '../services/ListsService'
+import { tasksService } from '../services/TasksService'
 
 export default {
   setup() {
@@ -28,6 +29,7 @@ export default {
     onMounted(async() => {
       boardsService.getBoard(route.params.id)
       listsService.getListsByBoardId(route.params.id)
+      tasksService.getAllTasksByBoardId(route.params.id)
     })
     return {
       board: computed(() => AppState.board),
