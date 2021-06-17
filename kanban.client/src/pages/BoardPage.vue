@@ -20,12 +20,14 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { boardsService } from '../services/BoardsService'
 import { AppState } from '../AppState'
+import { listsService } from '../services/ListsService'
 
 export default {
   setup() {
     const route = useRoute()
     onMounted(async() => {
       boardsService.getBoard(route.params.id)
+      listsService.getListsbyBoardId(route.params.id)
     })
     return {
       board: computed(() => AppState.board),
