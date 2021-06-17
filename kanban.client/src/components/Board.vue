@@ -44,14 +44,10 @@ export default {
       board: computed(() => AppState.boards),
       tasks: computed(() => AppState.tasks)
     })
-<<<<<<< HEAD
     return {
-      lists: computed(() => AppState.lists),
-      state
+      state,
+      lists: computed(() => AppState.lists)
     }
-=======
-    return { state }
->>>>>>> 988365b424ca8fd1ffedd029d6d86e8ccd824ba9
   }
 
 }

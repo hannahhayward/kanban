@@ -3,7 +3,7 @@ import { BadRequest } from '../utils/Errors'
 
 class BoardsService {
   async getAllByCreatorId(userId) {
-    const board = await dbContext.Board.findById({ creatorId: userId })
+    const board = await dbContext.Board.findById(userId)
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }
