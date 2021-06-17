@@ -9,8 +9,8 @@ class ListsService {
     logger.log(AppState.lists, 'lists')
   }
 
-  async getLists(id) {
-    const res = await api.get('/api/lists/' + id)
+  async getLists() {
+    const res = await api.get('/api/lists/')
     AppState.lists = res.data
   }
 }
