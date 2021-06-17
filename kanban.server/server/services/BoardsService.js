@@ -17,7 +17,7 @@ class BoardsService {
   }
 
   async getAllBoards(userId) {
-    const boards = await dbContext.Board.find({ creatorId: userId }).populate('creator', 'name picture')
+    const boards = await dbContext.Board.find({ }).populate('creator', 'name picture')
     return (boards)
   }
 
