@@ -17,7 +17,6 @@
       </router-link>
     </div>
     <div>
-      <Lists v-for="list in lists | lists.filter(list => lists.boardId === board._id)" :key="list.id" :list="list" />
     </div>
   </div>
 </template>
@@ -44,14 +43,10 @@ export default {
       board: computed(() => AppState.boards),
       tasks: computed(() => AppState.tasks)
     })
-<<<<<<< HEAD
     return {
-      lists: computed(() => AppState.lists),
-      state
+      state,
+      lists: computed(() => AppState.lists)
     }
-=======
-    return { state }
->>>>>>> 988365b424ca8fd1ffedd029d6d86e8ccd824ba9
   }
 
 }
