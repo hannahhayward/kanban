@@ -4,7 +4,7 @@
       <div class="col-10 m-auto">
         <h1>{{ board.name }}</h1>
       </div>
-      <Lists v-for="list in lists " :key="list.id" :list="list" />
+      <Lists v-for="list in lists" :key="list.id" :list="list" />
     </div>
   </div>
 </template>
@@ -14,21 +14,15 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { boardsService } from '../services/BoardsService'
 import { AppState } from '../AppState'
-import { listsService } from '../services/ListsService'
-
 export default {
   setup() {
     const route = useRoute()
     onMounted(async() => {
-      listsService.getLists(route.params.id)
       boardsService.getBoard(route.params.id)
     })
     return {
       board: computed(() => AppState.board),
-      getLists() {
-        listsService.getLists()
-        AppState.lists.find(l => this.board.boardId === l.boardId)
-      }
+      lists: computed(() => AppState.lists)
     }
   }
 }
