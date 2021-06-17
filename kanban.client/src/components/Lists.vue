@@ -1,20 +1,47 @@
 <template>
-  <div class="lists">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      {{ list.name }}
-    </button>
+  <div class="lists col-3 d-flex">
+    <div class="card mx-4">
+      <div class="card-header">
+        <h3 class="text-dark text-center" data-toggle="modal" data-target="#exampleModal">
+          {{ list.name }}
+        </h3>
+      </div>
+      <div class="card-body">
+        <p>
+          <input type="checkbox" :name="list.name" :id="list.id">
+          <!-- <b>{{ task.name }}</b>
+          {{ task.description }} -->
+        </p>
+      </div>
+      <div class="card-footer">
+        <form @submit.prevent="createTask">
+          <input type="text" class="field-control" placeholder="Add a Task" v-model="state.newTask.name">
+          <button class="btn btn-success btn-block">
+            <i class="fa fas fa-plus fa-lg"></i>
+          </button>
+        </form>
+      </div>
+    </div>
     <ListModal :list-prop="list" />
   </div>
 </template>
 
 <script>
+import { tasksService } from '../services/TasksService'
 export default {
   name: 'Lists',
   props: { list: { type: Object, required: true } },
   setup(props) {
-    return {}
-  },
-  components: {}
+    const state = {
+      newTask: {}
+    }
+    return {
+      state,
+      createTask(newTask) {
+        tasksService.createTask(newTask)
+      }
+    }
+  }
 }
 </script>
 

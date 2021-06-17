@@ -1,10 +1,16 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid " :style="{backgroundImage: `url(${board.backgroundImg})`}">
     <div class="row">
-      <div class="col-10 m-auto">
-        <h1>{{ board.name }}</h1>
+      <div class="col-12">
+        <div :style="{'background-color':board.color }">
+          <h1 class="text-center">
+            {{ board.name }}
+          </h1>
+        </div>
       </div>
-      <Lists v-for="list in lists " :key="list.id" :list="list" />
+      <div class="row">
+        <Lists v-for="list in lists " :key="list.id" :list="list" />
+      </div>
     </div>
   </div>
 </template>
@@ -14,7 +20,6 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { boardsService } from '../services/BoardsService'
 import { AppState } from '../AppState'
-// import { listsService } from '../services/ListsService'
 
 export default {
   setup() {
@@ -25,10 +30,6 @@ export default {
     return {
       board: computed(() => AppState.board),
       lists: computed(() => AppState.lists.filter(l => route.params.id === l.boardId))
-      // getLists() {
-      //   listsService.getLists()
-      //   AppState.lists.find(l => this.board.boardId === l.boardId)
-      // }
     }
   }
 }
