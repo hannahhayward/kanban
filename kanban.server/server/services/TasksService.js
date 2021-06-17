@@ -2,8 +2,8 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class TasksService {
-  async getAllByCreatorId(id) {
-    const task = await dbContext.Task.findById(id)
+  async getAllByCreatorId(userId) {
+    const task = await dbContext.Task.findById(userId)
     if (!task) {
       throw new BadRequest('Invalid task Id')
     }
@@ -21,16 +21,16 @@ class TasksService {
     return task
   }
 
-  async editTask(id, taskData) {
-    const task = await dbContext.Task.findByIdAndUpdate(id, taskData, { new: true, runValidators: true })
+  async editTask(userId, taskData) {
+    const task = await dbContext.Task.findByIdAndUpdate(userId, taskData, { new: true, runValidators: true })
     if (!task) {
       throw new BadRequest('Invalid task Id')
     }
     return task
   }
 
-  async deleteTask(id) {
-    const task = await dbContext.Task.findByIdAndDelete(id)
+  async deleteTask(userId) {
+    const task = await dbContext.Task.findByIdAndDelete(userId)
     if (!task) {
       throw new BadRequest('Invalid task Id')
     }

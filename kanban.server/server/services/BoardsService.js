@@ -3,11 +3,16 @@ import { BadRequest } from '../utils/Errors'
 
 class BoardsService {
   async getAllByCreatorId(userId) {
-    const board = await dbContext.Board.findById({ creatorId: userId })
+    const board = await dbContext.Board.findById(userId)
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }
     return board
+  }
+
+  async getAllBoards(userId) {
+    const boards = await dbContext.Board.find({ }).populate('creator', 'name picture')
+    return boards
   }
 
   async createBoard(boardData) {
@@ -16,13 +21,8 @@ class BoardsService {
     return board
   }
 
-  async getAllBoards(userId) {
-    const boards = await dbContext.Board.find({ }).populate('creator', 'name picture')
-    return (boards)
-  }
-
   async editBoard(userId, boardData) {
-    const board = await dbContext.Board.findByIdAndUpdate({ creatorId: userId }, boardData, { new: true, runValidators: true })
+    const board = await dbContext.Board.findByIdAndUpdate(userId, boardData, { new: true, runValidators: true })
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }
@@ -30,7 +30,7 @@ class BoardsService {
   }
 
   async deleteBoard(userId) {
-    const board = await dbContext.Board.findByIdAndDelete({ creatorId: userId })
+    const board = await dbContext.Board.findByIdAndDelete(userId)
     if (!board) {
       throw new BadRequest('Invalid Board Id')
     }

@@ -2,15 +2,15 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class ListsService {
-  async getAllByBoardId(id) {
-    const list = await dbContext.List.findById(id)
+  async getAllByBoardId(userId) {
+    const list = await dbContext.List.findById(userId)
     if (!list) {
       throw new BadRequest('Invalid List Id')
     }
     return list
   }
 
-  async getAllLists() {
+  async getAllLists(userId) {
     const lists = await dbContext.List.find().populate('creator', 'name picture')
     return lists
   }
@@ -21,16 +21,16 @@ class ListsService {
     return list
   }
 
-  async editList(id, listData) {
-    const list = await dbContext.List.findByIdAndUpdate(id, listData, { new: true, runValidators: true })
+  async editList(userId, listData) {
+    const list = await dbContext.List.findByIdAndUpdate(userId, listData, { new: true, runValidators: true })
     if (!list) {
       throw new BadRequest('Invalid List Id')
     }
     return list
   }
 
-  async deleteList(id) {
-    const list = await dbContext.List.findByIdAndDelete(id)
+  async deleteList(userId) {
+    const list = await dbContext.List.findByIdAndDelete(userId)
     if (!list) {
       throw new BadRequest('Invalid List Id')
     }
