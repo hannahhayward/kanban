@@ -1,12 +1,10 @@
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class ListsService {
-  async getLists() {
-    const res = await api.get('/api/lists/')
+  async getListsByBoardId(id) {
+    const res = await api.get('/api/lists/' + id)
     AppState.lists = res.data
-    logger.log('lists', AppState.lists)
   }
 }
 export const listsService = new ListsService()

@@ -2,7 +2,7 @@
   <div class="lists col-3 d-flex">
     <div class="card mx-4">
       <div class="card-header">
-        <h3 class="text-dark text-center" data-toggle="modal" data-target="#exampleModal">
+        <h3 class="text-dark text-center" data-toggle="modal" :data-target="`#listNum${list.id}`">
           {{ list.name }}
         </h3>
       </div>

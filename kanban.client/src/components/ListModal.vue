@@ -1,7 +1,7 @@
 <template>
   <div class="listModal">
     <div class="modal fade"
-         id="exampleModal"
+         :id="`listNum${listProp.id}`"
          tabindex="-1"
          role="dialog"
          aria-labelledby="exampleModalLabel"
