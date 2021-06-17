@@ -3,8 +3,8 @@
     <div class="row">
       <div class="board-section col-7 m-3" style="height: 100vh">
         <div class="create-board-form m-3 bg shadow px-2 pt-2" style="height: 20vh">
-          <form class="create-list">
-            <div class="form-group my-1" @submit.prevent="createBoard">
+          <form class="create-board" @submit.prevent="createBoard" id="create-board">
+            <div class="form-group my-1">
               <label class="sr-only">Name </label>
               <input type="text" class="form-control outline" v-model="state.newBoard.name" placeholder="Name" required>
               <div class="form-group my-1">
@@ -42,12 +42,18 @@ import { AppState } from '../AppState'
 export default {
   name: 'BoardsPage',
   setup() {
-    const state = reactive({ newBoard: {} })
+    const state = reactive({
+      newBoard: {
+        name: '',
+        color: '',
+        bgImg: ''
+      }
+    })
     return {
       boards: computed(() => AppState.boards),
       state,
-      createBoard(newBoard) {
-        boardsService.createBoard(newBoard)
+      async createBoard() {
+        await boardsService.createBoard(state.newBoard)
       }
     }
   }

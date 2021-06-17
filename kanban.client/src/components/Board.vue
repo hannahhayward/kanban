@@ -6,12 +6,15 @@
        }"
   >
     <div class="card-header">
-      <i class="fas fa-times fa-lg text-right text-danger" @click="deleteBoard(board.id)"></i>
+      <i class="fas fa-times fa-2x text-right text-dark" @click="deleteBoard(board.id)"></i>
     </div>
     <div class="card-body">
-      <h1 class="text-center text">
-        {{ board.name }}
-      </h1>
+      <!-- TODO - figure out how to remove text decoration -->
+      <router-link :to="{ name: 'Board', params:{id: board.id} }" :key="board.boardId" style="text-decoration: none" class=" link">
+        <h1 class="text-center text">
+          {{ board.name }}
+        </h1>
+      </router-link>
     </div>
   </div>
 </template>
@@ -28,9 +31,7 @@ export default {
     const state = reactive({
       board: computed(() => AppState.boards)
     })
-    return {
-      state
-    }
+    return { state }
   }
 
 }
@@ -38,7 +39,9 @@ export default {
 
 <style>
 .text{
- text-shadow: 1px 1px #81817d ;
+ text-shadow: 1px 1px rgb(129, 129, 125) ;
 }
-
+.link{
+  text-decoration: none;
+}
 </style>

@@ -7,15 +7,19 @@ class BoardsService {
   async getBoards() {
     const res = await api.get('/api/boards')
     AppState.boards = res.data
-    logger.log(res)
+  }
+
+  async getBoard(id) {
+    const res = await api.get('/api/boards/' + id)
+    AppState.board = res.data
   }
 
   async createBoard(newBoard) {
-    const account = AppState.account.id
+    logger.log(newBoard)
     try {
-      const res = await api.post(`/api/boards/${account}`, newBoard)
+      const res = await api.post('/api/boards', newBoard)
       AppState.boards = res.data
-      logger.log(AppState.boards, 'appstate')
+      logger.log(res, 'new board res')
     } catch (error) {
       Notification.toast(error, error)
     }
