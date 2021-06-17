@@ -14,7 +14,6 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { boardsService } from '../services/BoardsService'
 import { AppState } from '../AppState'
-// import { listsService } from '../services/ListsService'
 
 export default {
   setup() {
@@ -25,10 +24,6 @@ export default {
     return {
       board: computed(() => AppState.board),
       lists: computed(() => AppState.lists.filter(l => route.params.id === l.boardId))
-      // getLists() {
-      //   listsService.getLists()
-      //   AppState.lists.find(l => this.board.boardId === l.boardId)
-      // }
     }
   }
 }

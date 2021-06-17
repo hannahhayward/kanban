@@ -23,22 +23,13 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import Notification from '../utils/Notification'
-import { listsService } from '../services/ListsService'
 export default {
   props: {
     board: { type: Object, required: true }
   },
   setup(props) {
-    onMounted(async() => {
-      try {
-        listsService.getAllLists()
-      } catch (error) {
-        Notification.toast(error, 'Cant get lists..')
-      }
-    })
     const state = reactive({
       board: computed(() => AppState.boards),
       tasks: computed(() => AppState.tasks)
