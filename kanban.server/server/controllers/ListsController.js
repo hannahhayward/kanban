@@ -24,7 +24,7 @@ export class ListsController extends BaseController {
 
   async getAllByCreatorId(req, res, next) {
     try {
-      const list = await listsService.getAllByCreatorId(req.params.id)
+      const list = await listsService.getAllByBoardId(req.params.id)
       return res.send(list)
     } catch (error) {
       next(error)

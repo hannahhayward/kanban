@@ -10,6 +10,7 @@ import { createServer } from 'http'
 const app = express()
 const httpServer = createServer(app)
 const io = new Server(httpServer)
+// NOTE update io
 const port = process.env.PORT || 3000
 
 // Establish Socket
