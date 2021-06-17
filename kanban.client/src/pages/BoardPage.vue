@@ -4,6 +4,7 @@
       <div class="col-10 m-auto">
         <h1>{{ board.name }}</h1>
       </div>
+      <Lists v-for="list in lists | lists.filter(list => lists.boardId === board._id)" :key="list.id" :list="list" />
     </div>
   </div>
 </template>

@@ -17,7 +17,6 @@
       </router-link>
     </div>
     <div>
-      <Lists v-for="list in lists | lists.filter(list => lists.boardId === board._id)" :key="list.id" :list="list" />
     </div>
   </div>
 </template>
