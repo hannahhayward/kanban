@@ -28,6 +28,8 @@
 
 <script>
 import { tasksService } from '../services/TasksService'
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
   name: 'Lists',
   props: { list: { type: Object, required: true } },
@@ -37,6 +39,7 @@ export default {
     }
     return {
       state,
+      lists: computed(() => AppState.lists),
       createTask(newTask) {
         tasksService.createTask(newTask)
       }
