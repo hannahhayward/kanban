@@ -2,8 +2,8 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class ListsService {
-  async getAllByBoardId(userId) {
-    const list = await dbContext.List.findById(userId)
+  async getAllListsByBoardId(Id) {
+    const list = await dbContext.Board.find(d => d === Id)
     if (!list) {
       throw new BadRequest('Invalid List Id')
     }
