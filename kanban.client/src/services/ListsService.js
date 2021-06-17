@@ -8,5 +8,10 @@ class ListsService {
     AppState.lists = res.data
     logger.log(AppState.lists, 'lists')
   }
+
+  async getLists(id) {
+    const res = await api.get('/api/lists/' + id)
+    AppState.lists = res.data
+  }
 }
 export const listsService = new ListsService()
