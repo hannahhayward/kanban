@@ -6,7 +6,6 @@ import { accountService } from './AccountService'
 import { api } from './AxiosService'
 // import { BoardPage } from '../pages/BoardPage'
 import { boardsService } from './BoardsService'
-import { tasksService } from './TasksService'
 
 export const AuthService = initialize({
   domain,
@@ -28,10 +27,6 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   AppState.user = AuthService.user
   await accountService.getAccount()
   await boardsService.getBoards()
-<<<<<<< HEAD
-  await tasksService.getTasks()
-=======
->>>>>>> 0bd34d9c94eda5bf1efef59fbd7d183635a7d244
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })
 
