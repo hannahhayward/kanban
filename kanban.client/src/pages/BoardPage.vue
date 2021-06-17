@@ -31,7 +31,7 @@ export default {
     })
     return {
       board: computed(() => AppState.board),
-      lists: computed(() => AppState.lists.filter(l => route.params.id === l.boardId))
+      lists: computed(() => AppState.lists)
     }
   }
 }
