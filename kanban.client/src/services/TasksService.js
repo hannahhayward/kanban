@@ -16,7 +16,7 @@ class TasksService {
 
   async createTask(newTask) {
     const res = await api.post('/api/tasks', newTask)
-    logger.log(res, 'new task')
+    logger.log(res.data, 'new task in serviice')
   }
 }
 export const tasksService = new TasksService()

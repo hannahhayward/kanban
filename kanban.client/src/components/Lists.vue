@@ -14,9 +14,9 @@
         </p>
       </div>
       <div class="card-footer">
-        <form @submit.prevent="createTask">
+        <form @submit.prevent="createTask(state.newTask)">
           <input type="text" class="field-control" placeholder="Add a Task" v-model="state.newTask.name">
-          <button class="btn btn-success btn-block">
+          <button class="btn btn-success btn-block" type="submit">
             <i class="fa fas fa-plus fa-lg"></i>
           </button>
         </form>
@@ -28,19 +28,21 @@
 
 <script>
 import { tasksService } from '../services/TasksService'
-import { computed } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
 export default {
   name: 'Lists',
   props: { list: { type: Object, required: true } },
   setup(props) {
-    const state = {
+    const state = reactive({
       newTask: {}
-    }
+    })
     return {
       state,
       lists: computed(() => AppState.lists),
       createTask(newTask) {
+        logger.log(newTask, 'task in task')
         tasksService.createTask(newTask)
       }
     }

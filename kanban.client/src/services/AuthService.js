@@ -28,7 +28,10 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   AppState.user = AuthService.user
   await accountService.getAccount()
   await boardsService.getBoards()
+<<<<<<< HEAD
   await tasksService.getTasks()
+=======
+>>>>>>> 0bd34d9c94eda5bf1efef59fbd7d183635a7d244
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })
 
