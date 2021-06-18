@@ -1,6 +1,6 @@
 <template>
-  <div class="lists col-3 d-flex">
-    <div class="card mx-4">
+  <div class="lists col-4 d-flex">
+    <div class="card ">
       <div class="card-header">
         <h3 class="text-dark text-center" data-toggle="modal" :data-target="`#listNum${list.id}`">
           {{ list.name }}
@@ -23,8 +23,8 @@
       <button class="btn btn-danger btn-block" @click="deleteList(list.id)">
         -
       </button>
+      <ListModal :list-prop="list" />
     </div>
-    <ListModal :list-prop="list" />
   </div>
 </template>
 

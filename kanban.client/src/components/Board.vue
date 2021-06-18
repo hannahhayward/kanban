@@ -21,22 +21,22 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { boardsService } from '../services/BoardsService'
-import { listsService } from '../services/ListsService'
+// import { listsService } from '../services/ListsService'
 export default {
   props: {
     board: { type: Object, required: true }
   },
   setup(props) {
-    onMounted(async() => {
-      try {
-        listsService.getListsByBoardId()
-      } catch (error) {
-        Notification.toast(error, 'you messed up, cant get lists by id')
-      }
-    })
+    // onMounted(async() => {
+    //   try {
+    //     // listsService.getListsByBoardId()
+    //   } catch (error) {
+    //     Notification.toast(error, 'you messed up, cant get lists by id')
+    //   }
+    // })
     const state = reactive({
       board: computed(() => AppState.boards),
       tasks: computed(() => AppState.tasks)
