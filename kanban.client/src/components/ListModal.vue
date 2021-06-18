@@ -54,16 +54,6 @@
               </div>
               <div>
                 <Comment v-for="comment in filterComment(task.Id)" :key="comment.id" />
-                <form @submit.prevent="createComment(state.newComment, task.id)" :id="task.id">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Add a Comment" v-model="state.newComment.body" :id="task.id" />
-                  </div>
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                      create
-                    </button>
-                  </div>
-                </form>
               </div>
             </div>
           </div>
