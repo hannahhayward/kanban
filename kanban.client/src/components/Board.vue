@@ -23,6 +23,7 @@
 import { reactive } from '@vue/reactivity'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { boardsService } from '../services/BoardsService'
 export default {
   props: {
     board: { type: Object, required: true }
@@ -34,11 +35,16 @@ export default {
     })
     return {
       state,
-      lists: computed(() => AppState.lists)
+      lists: computed(() => AppState.lists),
+      async deleteBoard(Id) {
+        if (confirm('Do you really want to delete this board ??')) {
+          boardsService.deleteBoard(Id)
+        }
+      }
     }
   }
-
 }
+
 </script>
 
 <style>

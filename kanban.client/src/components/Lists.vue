@@ -8,7 +8,6 @@
       </div>
       <div class="card-body">
         <p>
-          <input type="checkbox" :name="list.name" :id="list.id">
           <!-- <b>{{ task.name }}</b>
           {{ task.description }} -->
         </p>
@@ -21,6 +20,9 @@
           </button>
         </form>
       </div>
+      <button class="btn btn-danger btn-block" @click="deleteList(list.id)">
+        - {{ list.id }}
+      </button>
     </div>
     <ListModal :list-prop="list" />
   </div>
@@ -31,6 +33,7 @@ import { tasksService } from '../services/TasksService'
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import { listsService } from '../services/ListsService'
 export default {
   name: 'Lists',
   props: { list: { type: Object, required: true } },
@@ -44,6 +47,9 @@ export default {
       createTask(newTask) {
         logger.log(newTask, 'task in task')
         tasksService.createTask(newTask)
+      },
+      async deleteList(id) {
+        listsService.deleteList(id)
       }
     }
   }

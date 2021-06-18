@@ -53,7 +53,7 @@ export class ListsController extends BaseController {
 
   async deleteList(req, res, next) {
     try {
-      const list = await listsService.deleteList(req.userInfo.id)
+      const list = await listsService.deleteList(req.params.id)
       return res.send(list)
     } catch (error) {
       next(error)
