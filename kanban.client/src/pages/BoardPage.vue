@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid " :style="{backgroundImage: `url(${board.backgroundImg})`}">
-    <div class="row">
+    <div class="row" :style="{'background-color':board.color }">
       <div class="col-12">
         <div :style="{'background-color':board.color }">
           <h1 class="text-center">
@@ -8,26 +8,29 @@
           </h1>
         </div>
       </div>
-      <div class="row">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-body">
-              <form id="create-list" @submit.prevent="createList(state.newList)">
+    </div>
+    <div class="row">
+      <div class="col-4 my-2 ml-2 border border-success">
+        <div class="py-2 ">
+          <h5 class="text-center">
+            Create a New List
+          </h5>
+          <div class="body">
+            <form id="create-list" @submit.prevent="createList(state.newList)">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="List Name" v-model="state.newList.name">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="List Name" v-model="state.newList.name">
-                  <div class="input-group">
-                    <input type="color" class="form-control" placeholder="List Color" v-model="state.newList.color">
-                  </div>
+                  <input type="color" class="form-control" placeholder="List Color" v-model="state.newList.color">
                 </div>
-                <button class="btn btn-success btn-block">
-                  <i class="fas fa-plus fa-lg"></i>
-                </button>
-              </form>
-            </div>
+              </div>
+              <button class="btn btn-success btn-block">
+                <i class="fas fa-plus fa-lg"></i>
+              </button>
+            </form>
           </div>
         </div>
-        <Lists v-for="list in lists " :key="list.id" :list="list" />
       </div>
+      <Lists v-for="list in lists " :key="list.id" :list="list" />
     </div>
   </div>
 </template>

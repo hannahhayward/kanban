@@ -1,9 +1,12 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <img src="https://via.placeholder.com/150/0000FF/808080" alt="Theme Logo">
-    <h1 class="my-5 bg-dark text-light p-3 rounded d-flex align-items-center">
-      <span class="mx-2 text-white">Flex Goal Home Page</span>
-    </h1>
+  <div class="container-fluid" style="background-image: url(https://www.foodbeverageinsider.com/sites/foodbeverageinsider.com/files/The%20agile%20path%20to%20market.jpg); object-fit: fill; background-repeat: no-repeat">
+    <div class="row">
+      <div class="col-5 text-light padding">
+        <h3 class="glow">
+          An Easy Way to Manage Projects at Your Fingertips
+        </h3>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,12 +17,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home{
-  text-align: center;
-  user-select: none;
-  > img{
-    height: 200px;
-    width: 200px;
-  }
+.padding{
+  padding-left: 15vh;
+  padding-top: 30vh;}
+.glow{
+  text-shadow: -8px 0px 7px #1fa6c7;
 }
+
 </style>
