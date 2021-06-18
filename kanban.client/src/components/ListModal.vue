@@ -88,7 +88,8 @@ import { useRoute } from 'vue-router'
 export default {
   name: 'ListModal',
   props: {
-    listProp: { type: Object, required: true }
+    listProp: { type: Object, required: true },
+    taskProp: { type: Object, required: true }
   },
   setup(props) {
     const state = reactive({
@@ -119,9 +120,9 @@ export default {
         const comments = AppState.comments.filter(c => c.taskId === taskId)
         return comments
       },
-      createComment(newComment, taskId) {
-        logger.log(taskId, 'that id yo')
-        newComment.taskId = taskId
+      createComment(newComment, tId) {
+        logger.log(tId, 'that id yo')
+        newComment.taskId = tId
         newComment.boardId = route.params.id
         newComment.listId = props.listProp.id
         commentsService.createComment(newComment)

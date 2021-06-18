@@ -22,7 +22,7 @@
       <button class="btn btn-danger btn-block" @click="deleteList(list.id)">
         -
       </button>
-      <ListModal :list-prop="list" />
+      <ListModal :list-prop="list" :t="t" />
     </div>
   </div>
 </template>
