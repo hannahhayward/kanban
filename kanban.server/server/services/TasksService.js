@@ -3,7 +3,7 @@ import { BadRequest } from '../utils/Errors'
 
 class TasksService {
   async getAllTasksByBoardId(Id) {
-    const task = await dbContext.Task.find({ BoardId: Id })
+    const task = await dbContext.Task.find({ boardId: Id })
     if (!task) {
       throw new BadRequest('Invalid List Id')
     }

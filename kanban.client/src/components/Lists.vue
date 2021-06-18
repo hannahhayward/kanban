@@ -7,9 +7,8 @@
         </h3>
       </div>
       <div class="card-body">
-        <p>
-          <!-- <b>{{ task.name }}</b>
-          {{ task.description }} -->
+        <p v-for="task in filterTask(list.id)" :key="task.id">
+          {{ task.name }}
         </p>
       </div>
       <div class="card-footer">
@@ -30,24 +29,36 @@
 
 <script>
 import { tasksService } from '../services/TasksService'
-import { computed, reactive } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
+import { useRoute } from 'vue-router'
 import { listsService } from '../services/ListsService'
 export default {
   name: 'Lists',
   props: { list: { type: Object, required: true } },
   setup(props) {
+    onMounted(async() => {
+      await tasksService.getAllTasksByBoardId(route.params.id)
+    })
     const state = reactive({
       newTask: {}
     })
+    const route = useRoute()
     return {
       state,
       lists: computed(() => AppState.lists),
+      tasks: computed(() => AppState.tasks),
       createTask(newTask) {
-        logger.log(newTask, 'task in task')
+        newTask.listId = props.list.id
+        newTask.boardId = route.params.id
+        newTask.CreatorId = AppState.account.id
         tasksService.createTask(newTask)
       },
+      filterTask(listId) {
+        const tasks = AppState.tasks.filter(t => t.listId === listId)
+        return tasks
+      },
+
       deleteList(id) {
         listsService.deleteList(id)
       }
