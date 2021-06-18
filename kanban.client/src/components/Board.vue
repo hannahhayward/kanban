@@ -5,7 +5,7 @@
          '-webkit-filter': true
        }"
   >
-    <div class="header">
+    <div class="header" v-if="board.creatorId === account.id">
       <i class="fas fa-times fa-2x text-right text-dark p-1 shadow" @click="deleteBoard(board.id)"></i>
     </div>
     <div class="body">
@@ -48,7 +48,8 @@ export default {
         if (confirm('Do you really want to delete this board ??')) {
           boardsService.deleteBoard(Id)
         }
-      }
+      },
+      account: computed(() => AppState.account)
     }
   }
 }
