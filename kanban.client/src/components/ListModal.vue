@@ -18,7 +18,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <div v-for="task in tasks" :key="task.id" class="d-flex align-items-center justify-content-between m-2">
+            <div v-for="task in filterTask(listProp.id)" :key="task.id" class="d-flex align-items-center justify-content-between m-2">
               <h5>{{ task.name }}</h5>
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle"
@@ -30,7 +30,7 @@
                 >
                 </button>
                 <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <p>
                       Edit
                     </p>
@@ -40,13 +40,16 @@
                   <div class="form-group">
                     <label for="taskEditColor" class="sr-only">Color</label>
                     <input type="color" class="form-control" v-model="state.taskEdit.color" placeholder="Color">
-                  </div>
+                  </div> -->
                   <div class="dropdown-divider"></div>
                   <div class="dropdown-item bg-danger" @click="deleteTask(task.id)">
                     Delete
                   </div>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Move</a>
+                  <a class="dropdown-item">Move to:</a>
+                  <div class="dropdown-item" v-for="list in lists" :key="list.id" @click="moveTask(task.id, list.id)">
+                    {{ list.name }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -67,9 +70,6 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">
               Close
-            </button>
-            <button type="button" class="btn btn-primary">
-              Save changes
             </button>
           </div>
         </div>
@@ -99,6 +99,14 @@ export default {
       comments: computed(() => AppState.comments),
       lists: computed(() => AppState.lists),
       tasks: computed(() => AppState.tasks),
+
+      async moveTask(tId, lId) {
+        tasksService.moveTask(tId, lId)
+      },
+      filterTask(listId) {
+        const tasks = AppState.tasks.filter(t => t.listId === listId)
+        return tasks
+      },
 
       async deleteTask(id) {
         if (confirm('Do you really want to delete this task ??')) {

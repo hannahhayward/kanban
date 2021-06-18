@@ -2,6 +2,11 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class TasksService {
+  async moveTask(tId, lId) {
+    const task = await dbContext.Task.findByIdAndUpdate(tId, { ListId: lId })
+    return task
+  }
+
   async getAllTasksByBoardId(Id) {
     const task = await dbContext.Task.find({ boardId: Id })
     if (!task) {
