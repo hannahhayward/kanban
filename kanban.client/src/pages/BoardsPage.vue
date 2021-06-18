@@ -1,8 +1,15 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="board-section col-7 m-3" style="height: 100vh">
-        <div class="create-board-form m-3 bg shadow px-2 pt-2" style="height: 20vh">
+  <div class="container-fluid bg">
+    <div class="row text-center mt-2">
+      <div class="col-10 m-auto">
+        <h2 class="text-dark mt-3">
+          Create a New Board
+        </h2>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center shadow pb-5 align-items-center">
+      <div class="board-section col-10">
+        <div class="create-board-form px-2 pt-2" style="height: 20vh">
           <form class="create-board" @submit.prevent="createBoard" id="create-board">
             <div class="form-group my-1">
               <label class="sr-only">Name </label>
@@ -21,15 +28,13 @@
             </div>
           </form>
         </div>
-        <div class="board-list row m-3" style="height: 70vh">
-          <div class="col-12 bg shadow">
-            <Board v-for="board in boards" :key="board.id" :board="board" />
-          </div>
-        </div>
+        <!-- <div class="accountDetail col-2 border border-dark m-3" style="height: 100vh">
+          <Account />
+        </div> -->
       </div>
-      <div class="accountDetail col-3 border border-dark m-3" style="height: 100vh">
-        <Account />
-      </div>
+    </div>
+    <div class="board-list row m-3 d-flex justify-content-center shadow py-3" style="height: 70vh">
+      <Board v-for="board in boards" :key="board.id" :board="board" />
     </div>
   </div>
 </template>
