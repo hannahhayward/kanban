@@ -42,7 +42,7 @@
                     <input type="color" class="form-control" v-model="state.taskEdit.color" placeholder="Color">
                   </div> -->
                   <div class="dropdown-divider"></div>
-                  <div class="dropdown-item bg-danger" @click="deleteTask(task.id)">
+                  <div v-if="listProp.creatorId === account.id" class="dropdown-item bg-danger" @click="deleteTask(task.id)">
                     Delete
                   </div>
                   <div class="dropdown-divider"></div>
@@ -71,7 +71,7 @@ import { AppState } from '../AppState'
 import { tasksService } from '../services/TasksService'
 export default {
   name: 'ListModal',
-  props: { listProp: { type: Object, required: true } },
+  props: { listProp: { type: Object, required: true }, taskProp: { type: Object, required: true } },
   setup(props) {
     const state = reactive({
       taskEdit: {}
@@ -80,6 +80,7 @@ export default {
       state,
       lists: computed(() => AppState.lists),
       tasks: computed(() => AppState.tasks),
+      account: computed(() => AppState.account),
 
       async moveTask(tId, lId) {
         tasksService.moveTask(tId, lId)
