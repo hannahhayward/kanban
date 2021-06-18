@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid " :style="{backgroundImage: `url(${board.backgroundImg})`}">
+  <div class="container-fluid " :style="{backgroundImage: `url(${board.backgroundImg})`} || {'background-color':board.color }">
     <div class="row" :style="{'background-color':board.color }">
       <div class="col-12">
         <div :style="{'background-color':board.color }">
@@ -10,7 +10,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-4 my-2 ml-2 border border-success">
+      <Lists v-for="list in lists " :key="list.id" :list="list" />
+    </div>
+    <div class="row">
+      <div class="col-12 my-2 ml-2 border border-success">
         <div class="py-2 ">
           <h5 class="text-center">
             Create a New List
@@ -30,7 +33,6 @@
           </div>
         </div>
       </div>
-      <Lists v-for="list in lists " :key="list.id" :list="list" />
     </div>
   </div>
 </template>

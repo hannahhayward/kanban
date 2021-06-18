@@ -2,16 +2,16 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class CommentsService {
-  async getAllByCreatorId(userId) {
-    const comment = await dbContext.Comment.findById(userId)
+  async getAllByTaskId(id) {
+    const comment = await dbContext.Comment.find({ TaskId: id })
     if (!comment) {
       throw new BadRequest('Invalid comment Id')
     }
     return comment
   }
 
-  async getAllComments(userId) {
-    const comments = await dbContext.Comment.find({ }).populate('creator', 'name picture')
+  async getAllComments() {
+    const comments = await dbContext.Comment.find().populate('creator', 'name picture')
     return comments
   }
 

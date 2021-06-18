@@ -19,7 +19,7 @@
                 <input type="color" class="form-control outline" v-model="state.newBoard.color" placeholder="Color">
                 <div class="form-group my-1">
                   <label class="sr-only">Background image </label>
-                  <input type="text" class="form-control outline" v-model="state.newBoard.bgImg" placeholder="Background image Url">
+                  <input type="text" class="form-control outline" v-model="state.newBoard.backgroungImg" placeholder="Background image Url">
                 </div>
                 <button class=" btn btn-success btn-block" type="submit">
                   <i class="far fa-calendar-plus fa-lg"></i>
@@ -51,7 +51,7 @@ export default {
       newBoard: {
         name: '',
         color: '',
-        bgImg: ''
+        backgroungImg: ''
       }
     })
     return {
