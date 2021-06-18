@@ -6,6 +6,7 @@ class ListsService {
   async deleteList(id) {
     try {
       await api.delete('api/lists/' + id)
+      AppState.lists = AppState.lists.filter(l => l.id !== id)
     } catch (error) {
       Notification.toast(error)
     }
