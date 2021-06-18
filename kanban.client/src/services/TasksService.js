@@ -10,7 +10,7 @@ class TasksService {
 
   async createTask(newTask) {
     const res = await api.post('/api/tasks', newTask)
-    logger.log(res.data)
+    AppState.tasks = AppState.tasks.push(res.data)
   }
 
   async getAllTasksByBoardId(boardId) {
