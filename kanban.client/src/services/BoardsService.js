@@ -4,6 +4,11 @@ import { api } from './AxiosService'
 import Notification from '../utils/Notification'
 
 class BoardsService {
+  async deleteBoard(id) {
+    await api.delete('/api/boards/' + id)
+    AppState.boards = AppState.boards.filter(b => b.id !== id)
+  }
+
   async getBoards() {
     const res = await api.get('/api/boards')
     AppState.boards = res.data
@@ -15,10 +20,9 @@ class BoardsService {
   }
 
   async createBoard(newBoard) {
-    logger.log(newBoard)
     try {
       const res = await api.post('/api/boards', newBoard)
-      AppState.boards = res.data
+      this.getBoards()
       logger.log(res, 'new board res')
     } catch (error) {
       Notification.toast(error, error)
