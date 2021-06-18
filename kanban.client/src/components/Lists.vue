@@ -7,9 +7,9 @@
         </h3>
       </div>
       <div class="card-body">
-        <p v-for="task in filterTask(list.id)" :key="task.id">
+        <div v-for="task in filterTask(list.id)" :key="task.id">
           {{ task.name }}
-        </p>
+        </div>
       </div>
       <div class="card-footer">
         <form @submit.prevent="createTask(state.newTask)">
@@ -58,7 +58,6 @@ export default {
         const tasks = AppState.tasks.filter(t => t.listId === listId)
         return tasks
       },
-
       deleteList(id) {
         listsService.deleteList(id)
       }

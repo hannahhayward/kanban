@@ -50,6 +50,19 @@
                 </div>
               </div>
             </div>
+            <div>
+              <Comment v-for="comment in filterComment()" :key="comment.id" />
+              <form @submit.prevent="createComment(state.newComment)">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Add a Comment" v-model="state.newComment.body" />
+                </div>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit">
+                    create
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -69,15 +82,21 @@
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { tasksService } from '../services/TasksService'
+import { commentsService } from '../services/CommentService'
 export default {
   name: 'ListModal',
-  props: { listProp: { type: Object, required: true } },
+  props: {
+    listProp: { type: Object, required: true }
+    // task: { type: Object, required: true }
+  },
   setup(props) {
     const state = reactive({
-      taskEdit: {}
+      taskEdit: {},
+      newComment: {}
     })
     return {
       state,
+      comments: computed(() => AppState.comments),
       lists: computed(() => AppState.lists),
       tasks: computed(() => AppState.tasks),
 
@@ -85,6 +104,15 @@ export default {
         if (confirm('Do you really want to delete this task ??')) {
           tasksService.deleteTask(id)
         }
+      },
+      filterComment(taskId) {
+        const comments = AppState.comments.filter(c => c.taskId === taskId)
+        return comments
+      },
+      createComment(newComment) {
+        console.log(newComment, 'new comment')
+        newComment.taskId = task.id
+        commentsService.createComment(newComment)
       }
     }
   },
