@@ -4,6 +4,9 @@
       <div class="card-header">
         <h3 class="text-dark text-center" data-toggle="modal" :data-target="`#listNum${list.id}`">
           {{ list.name }}
+          <button v-if="list.creatorId === account.id" class="btn bg-transparent" @click="deleteList(list.id)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
         </h3>
       </div>
       <div class="card-body">
@@ -22,16 +25,16 @@
         </div>
       </div>
       <div class="card-footer">
+        <p class="text-center m-1">
+          Add a Task
+        </p>
         <form @submit.prevent="createTask(state.newTask)">
-          <input type="text" class="field-control" placeholder="Add a Task" v-model="state.newTask.name">
+          <input type="text" class="field-control mb-3" placeholder="Add a Task" v-model="state.newTask.name">
           <button class="btn btn-success btn-block" type="submit">
             <i class="fa fas fa-plus fa-lg"></i>
           </button>
         </form>
       </div>
-      <button v-if="list.creatorId === account.id" class="btn btn-danger btn-block" @click="deleteList(list.id)">
-        -
-      </button>
       <ListModal :list-prop="list" :task-prop="task" />
     </div>
   </div>
@@ -88,7 +91,7 @@ export default {
         commentsService.createComment(state.newComment)
       },
       deleteList(id) {
-        listsService.deleteList(id)
+        if (confirm('Do you really want to delete this task ??')) { listsService.deleteList(id) }
       }
     }
   }
