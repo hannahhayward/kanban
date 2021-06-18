@@ -19,10 +19,10 @@
           </button>
         </form>
       </div>
-      <button class="btn btn-danger btn-block" @click="deleteList(list.id)">
+      <button v-if="list.creatorId === account.id" class="btn btn-danger btn-block" @click="deleteList(list.id)">
         -
       </button>
-      <ListModal :list-prop="list" />
+      <ListModal :list-prop="list" :task="task" />
     </div>
   </div>
 </template>
@@ -48,6 +48,7 @@ export default {
       state,
       lists: computed(() => AppState.lists),
       tasks: computed(() => AppState.tasks),
+      account: computed(() => AppState.account),
       createTask(newTask) {
         newTask.listId = props.list.id
         newTask.boardId = route.params.id
