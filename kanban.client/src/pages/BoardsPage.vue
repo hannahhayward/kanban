@@ -10,7 +10,7 @@
     <div class="row d-flex justify-content-center shadow pb-5 align-items-center">
       <div class="board-section col-10">
         <div class="create-board-form px-2 pt-2" style="height: 20vh">
-          <form class="create-board" @submit.prevent="createBoard" id="create-board">
+          <form class="create-board shadow" @submit.prevent="createBoard" id="create-board">
             <div class="form-group my-1">
               <label class="sr-only">Name </label>
               <input type="text" class="form-control outline" v-model="state.newBoard.name" placeholder="Name" required>
@@ -66,12 +66,13 @@ export default {
 </script>
 
 <style scoped>
+
 .bg{
-  background-color: #e2e2df;
-  outline: solid .5px; color: #dfdfd5;
+  background-color: #2878a6ad;
+  outline: solid .5px #111101;
 }
 .outline{
-  border: dashed green 1.85px;
+  border: dashed #074061 1.85px;
 
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg bg-light">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h2>cool name like undertaking guru or some crap </h2>
+        <img src="https://github.com/wyattDockstader/kanban/blob/master/kanban%20logo.png?raw=true" alt="logo" class="size">
       </div>
     </router-link>
     <button
@@ -18,12 +18,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <li class="nav-item text-dark">
           <router-link :to="{ name: 'Home' }" class="nav-link">
             Home
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item text-dark" v-if="user.isAuthenticated">
           <router-link :to="{ name: 'Boards' }" class="nav-link">
             Boards
           </router-link>
@@ -116,8 +116,13 @@ a:hover {
 }
 .nav-link{
   text-transform: uppercase;
+  color: black;
 }
 .nav-item .nav-link.router-link-exact-active{
   color: var(--primary);
+}
+.size{
+  height: 10vh;
+  width: 10vh;
 }
 </style>

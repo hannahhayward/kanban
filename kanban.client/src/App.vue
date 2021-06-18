@@ -5,11 +5,6 @@
   <main>
     <router-view />
   </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Flex Goal Ads
-    </div>
-  </footer>
 </template>
 
 <script>
