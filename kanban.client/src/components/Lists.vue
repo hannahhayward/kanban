@@ -21,7 +21,7 @@
         </form>
       </div>
       <button class="btn btn-danger btn-block" @click="deleteList(list.id)">
-        - {{ list.id }}
+        -
       </button>
     </div>
     <ListModal :list-prop="list" />
@@ -48,7 +48,7 @@ export default {
         logger.log(newTask, 'task in task')
         tasksService.createTask(newTask)
       },
-      async deleteList(id) {
+      deleteList(id) {
         listsService.deleteList(id)
       }
     }

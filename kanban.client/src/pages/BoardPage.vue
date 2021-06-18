@@ -48,9 +48,9 @@ export default {
     })
     const route = useRoute()
     onMounted(async() => {
-      boardsService.getBoard(route.params.id)
-      listsService.getListsByBoardId(route.params.id)
-      tasksService.getAllTasksByBoardId(route.params.id)
+      await boardsService.getBoard(route.params.id)
+      await listsService.getListsByBoardId(route.params.id)
+      await tasksService.getAllTasksByBoardId(route.params.id)
     })
     return {
       state,
