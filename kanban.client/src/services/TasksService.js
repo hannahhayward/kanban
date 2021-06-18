@@ -18,5 +18,11 @@ class TasksService {
     AppState.tasks = res.data
     logger.log(res.data, 'res')
   }
+
+  async moveTask(tId, lId) {
+    await api.put('api/tasks/' + tId + '/' + lId)
+    const i = AppState.tasks.findIndex(t => t.id === tId)
+    AppState.tasks[i].listId = lId
+  }
 }
 export const tasksService = new TasksService()

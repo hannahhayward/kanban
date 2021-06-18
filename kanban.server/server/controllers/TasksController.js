@@ -11,7 +11,13 @@ export class TasksController extends BaseController {
       .get('', this.getAllTasks)
       .post('', this.createTask)
       .put('/:id', this.editTask)
+      .put('/:tId/:lId', this.moveTask)
       .delete('/:id', this.deleteTask)
+  }
+
+  async moveTask(req, res, next) {
+    const task = await tasksService.moveTask(req.params.tId, req.params.lId)
+    return res.send(task)
   }
 
   async getAllTasks(req, res, next) {
