@@ -18,7 +18,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <div v-for="task in filterTask(listProp.id)" :key="task.id" class="d-flex align-items-center justify-content-between m-2">
+            <div v-for="task in filterTask(listProp.id)" :key="task.id" :t="task.id" class="d-flex align-items-center justify-content-between m-2">
               <h5>{{ task.name }}</h5>
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle"
@@ -52,19 +52,19 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <Comment v-for="comment in filterComment()" :key="comment.id" />
-              <form @submit.prevent="createComment(state.newComment)">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Add a Comment" v-model="state.newComment.body" />
-                </div>
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="submit">
-                    create
-                  </button>
-                </div>
-              </form>
+              <div>
+                <Comment v-for="comment in filterComment(task.Id)" :key="comment.id" />
+                <form @submit.prevent="createComment(state.newComment, task.id)" :id="task.id">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Add a Comment" v-model="state.newComment.body" :id="task.id" />
+                  </div>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                      create
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -83,17 +83,19 @@ import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { tasksService } from '../services/TasksService'
 import { commentsService } from '../services/CommentService'
+import { logger } from '../utils/Logger'
+import { useRoute } from 'vue-router'
 export default {
   name: 'ListModal',
   props: {
     listProp: { type: Object, required: true }
-    // task: { type: Object, required: true }
   },
   setup(props) {
     const state = reactive({
       taskEdit: {},
       newComment: {}
     })
+    const route = useRoute()
     return {
       state,
       comments: computed(() => AppState.comments),
@@ -117,9 +119,11 @@ export default {
         const comments = AppState.comments.filter(c => c.taskId === taskId)
         return comments
       },
-      createComment(newComment) {
-        console.log(newComment, 'new comment')
-        newComment.taskId = task.id
+      createComment(newComment, taskId) {
+        logger.log(taskId, 'that id yo')
+        newComment.taskId = taskId
+        newComment.boardId = route.params.id
+        newComment.listId = props.listProp.id
         commentsService.createComment(newComment)
       }
     }
