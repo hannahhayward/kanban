@@ -3,7 +3,7 @@ import { BadRequest } from '../utils/Errors'
 
 class TasksService {
   async getAllTasksByBoardId(Id) {
-    const task = await dbContext.Task.find({ BoardId: Id })
+    const task = await dbContext.Task.find({ boardId: Id })
     if (!task) {
       throw new BadRequest('Invalid List Id')
     }
@@ -29,8 +29,8 @@ class TasksService {
     return task
   }
 
-  async deleteTask(userId) {
-    const task = await dbContext.Task.findByIdAndDelete(userId)
+  async deleteTask(id) {
+    const task = await dbContext.Task.findByIdAndDelete(id)
     if (!task) {
       throw new BadRequest('Invalid task Id')
     }

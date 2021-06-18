@@ -64,8 +64,6 @@ export default {
       createList(newList) {
         newList.boardId = route.params.id
         newList.creatorId = AppState.account.id
-        console.log(newList)
-        console.log(AppState.lists)
         listsService.createList(newList)
       }
     }

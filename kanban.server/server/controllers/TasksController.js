@@ -8,9 +8,15 @@ export class TasksController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id', this.getAllTasksByBoardId)
+      .get('', this.getAllTasks)
       .post('', this.createTask)
       .put('/:id', this.editTask)
       .delete('/:id', this.deleteTask)
+  }
+
+  async getAllTasks(req, res, next) {
+    const task = await tasksService.getAllTasks()
+    return res.send(task)
   }
 
   async getAllTasksByBoardId(req, res, next) {
@@ -43,7 +49,7 @@ export class TasksController extends BaseController {
 
   async deleteTask(req, res, next) {
     try {
-      const task = await tasksService.deleteTask(req.userInfo.id)
+      const task = await tasksService.deleteTask(req.params.id)
       return res.send(task)
     } catch (error) {
       next(error)

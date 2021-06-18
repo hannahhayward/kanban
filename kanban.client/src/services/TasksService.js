@@ -10,12 +10,13 @@ class TasksService {
 
   async createTask(newTask) {
     const res = await api.post('/api/tasks', newTask)
-    logger.log(res.data, 'new task in serviice')
+    logger.log(res.data)
   }
 
   async getAllTasksByBoardId(boardId) {
     const res = await api.get('/api/tasks/' + boardId)
     AppState.tasks = res.data
+    logger.log(res.data, 'res')
   }
 }
 export const tasksService = new TasksService()
