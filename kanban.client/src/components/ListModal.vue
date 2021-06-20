@@ -71,7 +71,9 @@ import { AppState } from '../AppState'
 import { tasksService } from '../services/TasksService'
 export default {
   name: 'ListModal',
-  props: { listProp: { type: Object, required: true }, taskProp: { type: Object, required: true } },
+  props: {
+    listProp: { type: Object, required: true }
+  },
   setup(props) {
     const state = reactive({
       taskEdit: {}
@@ -79,7 +81,6 @@ export default {
     return {
       state,
       lists: computed(() => AppState.lists),
-      tasks: computed(() => AppState.tasks),
       account: computed(() => AppState.account),
 
       async moveTask(tId, lId) {

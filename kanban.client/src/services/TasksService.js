@@ -1,5 +1,4 @@
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class TasksService {
@@ -16,7 +15,6 @@ class TasksService {
   async getAllTasksByBoardId(boardId) {
     const res = await api.get('/api/tasks/' + boardId)
     AppState.tasks = res.data
-    logger.log(res.data, 'res')
   }
 
   async moveTask(tId, lId) {

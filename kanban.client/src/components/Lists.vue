@@ -7,8 +7,8 @@
         </h3>
       </div>
       <div class="card-body">
-        <p v-for="task in filterTask(list.id)" :key="task.id">
-          {{ task.name }}
+        <p v-for="t in filterTask(list.id)" :key="t.id">
+          {{ t.name }}
         </p>
       </div>
       <div class="card-footer">
@@ -22,14 +22,14 @@
       <button v-if="list.creatorId === account.id" class="btn btn-danger btn-block" @click="deleteList(list.id)">
         -
       </button>
-      <ListModal :list-prop="list" :task="task" />
+      <ListModal :list-prop="list" />
     </div>
   </div>
 </template>
 
 <script>
 import { tasksService } from '../services/TasksService'
-import { computed, onMounted, reactive } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
 import { listsService } from '../services/ListsService'
@@ -37,9 +37,6 @@ export default {
   name: 'Lists',
   props: { list: { type: Object, required: true } },
   setup(props) {
-    onMounted(async() => {
-      await tasksService.getAllTasksByBoardId(route.params.id)
-    })
     const state = reactive({
       newTask: {}
     })
@@ -49,6 +46,7 @@ export default {
       lists: computed(() => AppState.lists),
       tasks: computed(() => AppState.tasks),
       account: computed(() => AppState.account),
+
       createTask(newTask) {
         newTask.listId = props.list.id
         newTask.boardId = route.params.id

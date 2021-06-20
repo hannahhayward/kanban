@@ -44,6 +44,7 @@ import { boardsService } from '../services/BoardsService'
 import { AppState } from '../AppState'
 import { listsService } from '../services/ListsService'
 import { tasksService } from '../services/TasksService'
+import { logger } from '../utils/Logger'
 
 export default {
   setup() {
@@ -53,8 +54,11 @@ export default {
     })
     const route = useRoute()
     onMounted(async() => {
+      logger.log('getting boards')
       await boardsService.getBoard(route.params.id)
+      logger.log('getting lists')
       await listsService.getListsByBoardId(route.params.id)
+      logger.log('getting tasks')
       await tasksService.getAllTasksByBoardId(route.params.id)
     })
     return {
