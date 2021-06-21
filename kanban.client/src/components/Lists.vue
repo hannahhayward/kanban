@@ -7,9 +7,7 @@
         </h3>
       </div>
       <div class="card-body">
-        <p v-for="t in filterTask(list.id)" :key="t.id">
-          {{ t.name }}
-        </p>
+        <Task v-for="task in filterTask(list.id)" :key="task.id" :task="task" />
       </div>
       <div class="card-footer">
         <form @submit.prevent="createTask(state.newTask)">
@@ -43,7 +41,6 @@ export default {
     const route = useRoute()
     return {
       state,
-      lists: computed(() => AppState.lists),
       tasks: computed(() => AppState.tasks),
       account: computed(() => AppState.account),
 
@@ -59,7 +56,7 @@ export default {
       },
 
       deleteList(id) {
-        listsService.deleteList(id)
+        if (confirm('Do you really want to delete this List ??')) { listsService.deleteList(id) }
       }
     }
   }

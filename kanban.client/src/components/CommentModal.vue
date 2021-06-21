@@ -1,7 +1,7 @@
 <template>
-  <div class="listModal">
+  <div class="taskModal">
     <div class="modal fade"
-         :id="`listNum${listProp.id}`"
+         :id="`listNum${taskProp.id}`"
          tabindex="-1"
          role="dialog"
          aria-labelledby="exampleModalLabel"
@@ -11,15 +11,15 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" id="exampleModalLabel">
-              {{ listProp.name }}
+              {{ taskProp.name }}
             </h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <div v-for="task in filterTask(listProp.id)" :key="task.id" class="d-flex align-items-center justify-content-between m-2">
-              <h5>{{ task.name }}</h5>
+            <div v-for="comment in comments" :key="comment.id" class="d-flex align-items-center justify-content-between m-2">
+              <p>{{ comment.body }} <img :src="comment.creator.picture" alt="" class="profile-img"> {{ comment.creator.name }}</p>
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle"
                         type="button"
@@ -42,16 +42,22 @@
                     <input type="color" class="form-control" v-model="state.taskEdit.color" placeholder="Color">
                   </div> -->
                   <div class="dropdown-divider"></div>
-                  <div v-if="task.creatorId === account.id" class="dropdown-item bg-danger" @click="deleteTask(task.id)">
+                  <div v-if="comment.creatorId === account.id" class="dropdown-item bg-danger" @click="deleteComment(comment.id)">
                     Delete
-                  </div>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item">Move to:</a>
-                  <div class="dropdown-item" v-for="list in lists" :key="list.id" @click="moveTask(task.id, list.id)">
-                    {{ list.name }}
                   </div>
                 </div>
               </div>
+            </div>
+            <div>
+              <form class="form-inline" @submit.prevent="createComment(state.newComment)">
+                <div class="form-group mx-sm-3 mb-2">
+                  <label for="newComment" class="sr-only">New Comment</label>
+                  <input type="text" class="form-control" v-model="state.newComment.body" placeholder="New Comment">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">
+                  Create Comment
+                </button>
+              </form>
             </div>
           </div>
           <div class="modal-footer">
@@ -68,40 +74,47 @@
 <script>
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { tasksService } from '../services/TasksService'
+import { commentsService } from '../services/CommentService'
 export default {
-  name: 'ListModal',
-  props: {
-    listProp: { type: Object, required: true }
-  },
+  name: 'CommentModal',
+  props: { taskProp: { type: Object, required: true } },
   setup(props) {
     const state = reactive({
-      taskEdit: {}
+      newComment: {
+        body: ''
+      }
     })
     return {
       state,
-      lists: computed(() => AppState.lists),
+      comments: computed(() => AppState.comments),
       account: computed(() => AppState.account),
 
-      async moveTask(tId, lId) {
-        tasksService.moveTask(tId, lId)
-      },
-      filterTask(listId) {
-        const tasks = AppState.tasks.filter(t => t.listId === listId)
+      filterComment(taskId) {
+        const tasks = AppState.comments.filter(c => c.taskId === taskId)
         return tasks
       },
 
-      async deleteTask(id) {
-        if (confirm('Do you really want to delete this task ??')) {
-          tasksService.deleteTask(id)
+      async deleteComment(id) {
+        if (confirm('Do you really want to delete this Comment ??')) {
+          commentsService.deleteComment(id)
         }
+      },
+
+      async createComment(newComment) {
+        newComment.taskId = props.taskProp.id
+        newComment.listId = props.taskProp.listId
+        newComment.boardId = props.taskProp.boardId
+        await commentsService.createComment(newComment)
       }
     }
-  },
-  components: {}
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.profile-img {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
 </style>

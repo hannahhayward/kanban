@@ -22,9 +22,6 @@
             <form id="create-list" @submit.prevent="createList(state.newList)">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="List Name" v-model="state.newList.name">
-                <div class="input-group">
-                  <input type="color" class="form-control" placeholder="List Color" v-model="state.newList.color">
-                </div>
               </div>
               <button class="btn btn-success btn-block">
                 <i class="fas fa-plus fa-lg"></i>
@@ -44,27 +41,25 @@ import { boardsService } from '../services/BoardsService'
 import { AppState } from '../AppState'
 import { listsService } from '../services/ListsService'
 import { tasksService } from '../services/TasksService'
-import { logger } from '../utils/Logger'
 
 export default {
   setup() {
     const state = reactive({
       newList: {
+        name: ''
       }
     })
     const route = useRoute()
     onMounted(async() => {
-      logger.log('getting boards')
       await boardsService.getBoard(route.params.id)
-      logger.log('getting lists')
       await listsService.getListsByBoardId(route.params.id)
-      logger.log('getting tasks')
       await tasksService.getAllTasksByBoardId(route.params.id)
     })
     return {
       state,
       board: computed(() => AppState.board),
       lists: computed(() => AppState.lists),
+
       createList(newList) {
         newList.boardId = route.params.id
         newList.creatorId = AppState.account.id

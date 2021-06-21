@@ -44,7 +44,7 @@ export default {
     return {
       state,
       lists: computed(() => AppState.lists),
-      async deleteBoard(Id) {
+      deleteBoard(Id) {
         if (confirm('Do you really want to delete this board ??')) {
           boardsService.deleteBoard(Id)
         }

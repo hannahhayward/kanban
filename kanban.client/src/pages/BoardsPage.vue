@@ -15,16 +15,12 @@
               <label class="sr-only">Name </label>
               <input type="text" class="form-control outline" v-model="state.newBoard.name" placeholder="Name" required>
               <div class="form-group my-1">
-                <label class="sr-only">Color </label>
-                <input type="color" class="form-control outline" v-model="state.newBoard.color" placeholder="Color">
-                <div class="form-group my-1">
-                  <label class="sr-only">Background image </label>
-                  <input type="text" class="form-control outline" v-model="state.newBoard.backgroungImg" placeholder="Background image Url">
-                </div>
-                <button class=" btn btn-success btn-block" type="submit">
-                  <i class="far fa-calendar-plus fa-lg"></i>
-                </button>
+                <label class="sr-only">Background image </label>
+                <input type="text" class="form-control outline" v-model="state.newBoard.backgroundImg" placeholder="Background image Url">
               </div>
+              <button class=" btn btn-success btn-block" type="submit">
+                <i class="far fa-calendar-plus fa-lg"></i>
+              </button>
             </div>
           </form>
         </div>
@@ -50,8 +46,7 @@ export default {
     const state = reactive({
       newBoard: {
         name: '',
-        color: '',
-        backgroungImg: ''
+        color: '#010101'
       }
     })
     return {

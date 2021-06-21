@@ -18,8 +18,7 @@ class ListsService {
   }
 
   async createList(newList) {
-    const res = await api.post('api/lists', newList)
-    AppState.lists = res.data
+    await api.post('api/lists', newList)
     this.getListsByBoardId(newList.boardId)
   }
 }
