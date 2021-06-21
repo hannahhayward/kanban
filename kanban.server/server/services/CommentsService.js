@@ -3,7 +3,7 @@ import { BadRequest } from '../utils/Errors'
 
 class CommentsService {
   async getAllByTaskId(id) {
-    const comment = await dbContext.Comment.find({ TaskId: id })
+    const comment = await dbContext.Comment.find({ taskId: id }).populate('creator', 'name picture')
     if (!comment) {
       throw new BadRequest('Invalid comment Id')
     }

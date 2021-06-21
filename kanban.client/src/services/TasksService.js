@@ -1,5 +1,4 @@
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class TasksService {
@@ -10,19 +9,18 @@ class TasksService {
 
   async createTask(newTask) {
     const res = await api.post('/api/tasks', newTask)
-    AppState.tasks = AppState.tasks.push(res.data)
+    this.getAllTasksByBoardId(res.data.boardId)
   }
 
   async getAllTasksByBoardId(boardId) {
     const res = await api.get('/api/tasks/' + boardId)
     AppState.tasks = res.data
-    logger.log(res.data, 'res')
   }
 
   async moveTask(tId, lId) {
-    await api.put('api/tasks/' + tId + '/' + lId)
     const i = AppState.tasks.findIndex(t => t.id === tId)
     AppState.tasks[i].listId = lId
+    await api.put('api/tasks/' + tId + '/' + lId)
   }
 }
 export const tasksService = new TasksService()

@@ -5,8 +5,13 @@
          '-webkit-filter': true
        }"
   >
+<<<<<<< HEAD
+    <div class="header">
+      <i v-if="board.creatorId === state.account.id" class="fas fa-times fa-2x text-right text-dark p-1 shadow" @click="deleteBoard(board.id)"></i>
+=======
     <div class="header" v-if="board.creatorId === account.id">
       <i class="fas fa-times fa-2x text-right text-dark p-1 shadow" @click="deleteBoard(board.id)"></i>
+>>>>>>> master
     </div>
     <div class="body">
       <!-- TODO - figure out how to remove text decoration -->
@@ -30,23 +35,19 @@ export default {
     board: { type: Object, required: true }
   },
   setup(props) {
-    // onMounted(async() => {
-    //   try {
-    //     // listsService.getListsByBoardId()
-    //   } catch (error) {
-    //     Notification.toast(error, 'you messed up, cant get lists by id')
-    //   }
-    // })
     const state = reactive({
       board: computed(() => AppState.boards),
-      tasks: computed(() => AppState.tasks)
+      tasks: computed(() => AppState.tasks),
+      account: computed(() => AppState.account)
     })
     return {
       state,
       lists: computed(() => AppState.lists),
-      async deleteBoard(Id) {
-        if (confirm('Do you really want to delete this board ??')) {
-          boardsService.deleteBoard(Id)
+      deleteBoard(Id) {
+        if (props.board.creatorId === AppState.account.id) {
+          if (confirm('Do you really want to delete this board ??')) {
+            boardsService.deleteBoard(Id)
+          }
         }
       },
       account: computed(() => AppState.account)

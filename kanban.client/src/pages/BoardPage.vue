@@ -22,9 +22,6 @@
             <form id="create-list" @submit.prevent="createList(state.newList)">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="List Name" v-model="state.newList.name">
-                <div class="input-group">
-                  <input type="color" class="form-control" placeholder="List Color" v-model="state.newList.color">
-                </div>
               </div>
               <button class="btn btn-success btn-block">
                 <i class="fas fa-plus fa-lg"></i>
@@ -49,6 +46,7 @@ export default {
   setup() {
     const state = reactive({
       newList: {
+        name: ''
       }
     })
     const route = useRoute()
@@ -61,6 +59,7 @@ export default {
       state,
       board: computed(() => AppState.board),
       lists: computed(() => AppState.lists),
+
       createList(newList) {
         newList.boardId = route.params.id
         newList.creatorId = AppState.account.id

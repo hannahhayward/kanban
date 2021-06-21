@@ -10,6 +10,9 @@
         </h3>
       </div>
       <div class="card-body">
+<<<<<<< HEAD
+        <Task v-for="task in filterTask(list.id)" :key="task.id" :task="task" />
+=======
         <div v-for="task in filterTask(list.id)" :key="task.id">
           {{ task.name }}
           <form @submit.prevent="createComment(task.id)">
@@ -23,6 +26,7 @@
             </div>
           </form>
         </div>
+>>>>>>> master
       </div>
       <div class="card-footer">
         <p class="text-center m-1">
@@ -35,14 +39,21 @@
           </button>
         </form>
       </div>
+<<<<<<< HEAD
+      <button v-if="list.creatorId === account.id" class="btn btn-danger btn-block" @click="deleteList(list.id)">
+        -
+      </button>
+      <ListModal :list-prop="list" />
+=======
       <ListModal :list-prop="list" :task-prop="task" />
+>>>>>>> master
     </div>
   </div>
 </template>
 
 <script>
 import { tasksService } from '../services/TasksService'
-import { computed, onMounted, reactive } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
 import { listsService } from '../services/ListsService'
@@ -52,9 +63,6 @@ export default {
   name: 'Lists',
   props: { list: { type: Object, required: true } },
   setup(props) {
-    onMounted(async() => {
-      await tasksService.getAllTasksByBoardId(route.params.id)
-    })
     const state = reactive({
       newTask: {},
       newComment: {
@@ -64,9 +72,9 @@ export default {
     const route = useRoute()
     return {
       state,
-      lists: computed(() => AppState.lists),
       tasks: computed(() => AppState.tasks),
       account: computed(() => AppState.account),
+
       createTask(newTask) {
         newTask.listId = props.list.id
         newTask.boardId = route.params.id
@@ -91,7 +99,11 @@ export default {
         commentsService.createComment(state.newComment)
       },
       deleteList(id) {
+<<<<<<< HEAD
+        if (confirm('Do you really want to delete this List ??')) { listsService.deleteList(id) }
+=======
         if (confirm('Do you really want to delete this task ??')) { listsService.deleteList(id) }
+>>>>>>> master
       }
     }
   }
