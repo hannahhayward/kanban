@@ -5,8 +5,13 @@
          '-webkit-filter': true
        }"
   >
+<<<<<<< HEAD
     <div class="header">
       <i v-if="board.creatorId === state.account.id" class="fas fa-times fa-2x text-right text-dark p-1 shadow" @click="deleteBoard(board.id)"></i>
+=======
+    <div class="header" v-if="board.creatorId === account.id">
+      <i class="fas fa-times fa-2x text-right text-dark p-1 shadow" @click="deleteBoard(board.id)"></i>
+>>>>>>> master
     </div>
     <div class="body">
       <!-- TODO - figure out how to remove text decoration -->
@@ -44,7 +49,8 @@ export default {
             boardsService.deleteBoard(Id)
           }
         }
-      }
+      },
+      account: computed(() => AppState.account)
     }
   }
 }

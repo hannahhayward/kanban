@@ -18,7 +18,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <div v-for="task in filterTask(listProp.id)" :key="task.id" class="d-flex align-items-center justify-content-between m-2">
+            <div v-for="task in filterTask(listProp.id)" :key="task.id" :t="task.id" class="d-flex align-items-center justify-content-between m-2">
               <h5>{{ task.name }}</h5>
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle"
@@ -52,6 +52,9 @@
                   </div>
                 </div>
               </div>
+              <div>
+                <Comment v-for="comment in filterComment(task.Id)" :key="comment.id" />
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -69,17 +72,28 @@
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { tasksService } from '../services/TasksService'
+import { commentsService } from '../services/CommentService'
+import { logger } from '../utils/Logger'
+import { useRoute } from 'vue-router'
 export default {
   name: 'ListModal',
   props: {
+<<<<<<< HEAD
     listProp: { type: Object, required: true }
+=======
+    listProp: { type: Object, required: true },
+    taskProp: { type: Object, required: true }
+>>>>>>> master
   },
   setup(props) {
     const state = reactive({
-      taskEdit: {}
+      taskEdit: {},
+      newComment: {}
     })
+    const route = useRoute()
     return {
       state,
+      comments: computed(() => AppState.comments),
       lists: computed(() => AppState.lists),
       account: computed(() => AppState.account),
 
@@ -95,6 +109,17 @@ export default {
         if (confirm('Do you really want to delete this task ??')) {
           tasksService.deleteTask(id)
         }
+      },
+      filterComment(taskId) {
+        const comments = AppState.comments.filter(c => c.taskId === taskId)
+        return comments
+      },
+      createComment(newComment, tId) {
+        logger.log(tId, 'that id yo')
+        newComment.taskId = tId
+        newComment.boardId = route.params.id
+        newComment.listId = props.listProp.id
+        commentsService.createComment(newComment)
       }
     }
   },
