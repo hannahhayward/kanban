@@ -3,7 +3,7 @@ import { BadRequest } from '../utils/Errors'
 
 class TasksService {
   async moveTask(tId, lId) {
-    const task = await dbContext.Task.findByIdAndUpdate(tId, { ListId: lId })
+    const task = await dbContext.Task.findByIdAndUpdate(tId, { listId: lId })
     return task
   }
 

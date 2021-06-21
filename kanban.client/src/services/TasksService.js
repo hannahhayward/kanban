@@ -18,9 +18,9 @@ class TasksService {
   }
 
   async moveTask(tId, lId) {
-    await api.put('api/tasks/' + tId + '/' + lId)
     const i = AppState.tasks.findIndex(t => t.id === tId)
     AppState.tasks[i].listId = lId
+    await api.put('api/tasks/' + tId + '/' + lId)
   }
 }
 export const tasksService = new TasksService()
