@@ -78,12 +78,7 @@ import { useRoute } from 'vue-router'
 export default {
   name: 'ListModal',
   props: {
-<<<<<<< HEAD
     listProp: { type: Object, required: true }
-=======
-    listProp: { type: Object, required: true },
-    taskProp: { type: Object, required: true }
->>>>>>> master
   },
   setup(props) {
     const state = reactive({

@@ -1,17 +1,7 @@
 <template>
-  <div class="w-100 text-light col-5 m-2 bg shadow  b"
-       :style="{
-         backgroundColor: board.color,
-         '-webkit-filter': true
-       }"
-  >
-<<<<<<< HEAD
+  <div class="w-100 text-light col-5 m-2 bg shadow" :style="{backgroundColor: board.color,'-webkit-filter': true}">
     <div class="header">
       <i v-if="board.creatorId === state.account.id" class="fas fa-times fa-2x text-right text-dark p-1 shadow" @click="deleteBoard(board.id)"></i>
-=======
-    <div class="header" v-if="board.creatorId === account.id">
-      <i class="fas fa-times fa-2x text-right text-dark p-1 shadow" @click="deleteBoard(board.id)"></i>
->>>>>>> master
     </div>
     <div class="body">
       <!-- TODO - figure out how to remove text decoration -->
